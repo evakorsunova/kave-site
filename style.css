@@ -69,7 +69,7 @@ img{ max-width:100%; display:block; }
 
 /* ---------- header / nav ---------- */
 header{
-  background:var(--violet);
+  background:var(--grey);
   color:var(--paper);
   padding:22px 0;
 }
@@ -85,6 +85,13 @@ header .wrap{
   font-size:1.6rem;
   color:var(--paper);
   letter-spacing:.03em;
+  display:inline-flex;
+  align-items:center;
+}
+.brand img{
+  height:32px;
+  width:auto;
+  display:block;
 }
 nav ul{
   list-style:none;
@@ -214,7 +221,11 @@ footer a{ color:var(--paper); text-decoration:underline; }
 footer a:hover{ color:var(--thread); }
 
 /* ---------- generic content page ---------- */
+body.subpage{ background:var(--grey); }
+
 .page-header{ padding:60px 0 20px; }
+.subpage .page-header h1{ text-transform:uppercase; color:var(--paper); }
+.subpage .page-header p{ color:var(--thread); }
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
