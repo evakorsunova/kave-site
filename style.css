@@ -110,8 +110,12 @@ nav a{
   letter-spacing:.06em;
   text-transform:uppercase;
 }
-nav a:hover{ color:var(--thread); text-decoration:none; }
+nav a:hover{ 
+  color:var(--thread); 
+  text-decoration:none; 
+}
 nav a.active{
+  color:var(--thread);
   border-bottom:2px dashed var(--thread);
   padding-bottom:3px;
 }
@@ -299,13 +303,12 @@ body.subpage{ background:var(--grey); }
   background:var(--grey);
   border:2px solid transparent;
   cursor:pointer;
-  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease, border-style .15s ease;
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease, border-style .15s ease, filter .15s ease;
 }
 .gallery figure:hover{
   transform:translateY(-3px);
   box-shadow:0 8px 20px rgba(0,0,0,.35);
-  border-color:var(--thread);
-  border-style:dashed;
+  border-color:var(--violet);
 }
 .gallery figure img{
   width:100%;
@@ -336,7 +339,7 @@ body.subpage{ background:var(--grey); }
   max-width:90vw;
   max-height:90vh;
   width:auto;
-  border:2px dashed var(--thread);
+  border:2px dashed var(--violet);
 }
 .lightbox-close{
   position:absolute;
@@ -401,7 +404,7 @@ body.subpage{ background:var(--grey); }
   height:100%;
   border-radius:50%;
   object-fit:cover;
-  border:8px solid var(--violet);
+  border:12px dashed var(--violet);
   display:block;
 }
 .circle-caption{
@@ -411,7 +414,7 @@ body.subpage{ background:var(--grey); }
   width:310px;
   height:310px;
   pointer-events:none;
-  animation:spin-caption 12s linear infinite;
+  animation:spin-caption 20s linear infinite;
 }
 @keyframes spin-caption{
   from{ transform:rotate(0deg); }
