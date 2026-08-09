@@ -32,55 +32,81 @@
 <section class="gallery-section">
   <div class="wrap">
     <div class="gallery">
-      <figure onclick="openLightbox('images/sewing/pinkset_evak.png','Pink sewn set')">
+      <figure onclick="openLightbox(0)">
         <img src="images/sewing/pinkset_evak.png" alt="Pink sewn set">
       </figure>
-      <figure onclick="openLightbox('images/sewing/purpleset_evak.png','Purple sewn set')">
+      <figure onclick="openLightbox(1)">
         <img src="images/sewing/purpleset_evak.png" alt="Purple sewn set">
       </figure>
-      <figure onclick="openLightbox('images/sewing/reddress_evak.png','Red dress')">
+      <figure onclick="openLightbox(2)">
         <img src="images/sewing/reddress_evak.png" alt="Red dress">
       </figure>
-      <figure onclick="openLightbox('images/sewing/checkerset_evak.png','Checker print set')">
+      <figure onclick="openLightbox(3)">
         <img src="images/sewing/checkerset_evak.png" alt="Checker print set">
       </figure>
-      <figure onclick="openLightbox('images/sewing/blueset_evak.png','Blue jumpsuit')">
+      <figure onclick="openLightbox(4)">
         <img src="images/sewing/blueset_evak.png" alt="Blue jumpsuit">
       </figure>
-      <figure onclick="openLightbox('images/sewing/blackdress_evak.png','Black mesh dress')">
+      <figure onclick="openLightbox(5)">
         <img src="images/sewing/blackdress_evak.png" alt="Black mesh dress">
       </figure>
-      <figure onclick="openLightbox('images/sewing/dotdress_evak.png','Dot print dress')">
+      <figure onclick="openLightbox(6)">
         <img src="images/sewing/dotdress_evak.png" alt="Dot print dress">
       </figure>
-      <figure onclick="openLightbox('images/sewing/blacktop_evak.png','Black mesh top')">
+      <figure onclick="openLightbox(7)">
         <img src="images/sewing/blacktop_evak.png" alt="Black mesh top">
       </figure>
-      <figure onclick="openLightbox('images/sewing/brownset_evak.png','Brown knit set')">
+      <figure onclick="openLightbox(8)">
         <img src="images/sewing/brownset_evak.png" alt="Brown knit set">
       </figure>
     </div>
   </div>
 </section>
 
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<div class="lightbox" id="lightbox">
   <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <span class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); showPrev()">&#10094;</span>
   <img id="lightbox-img" src="" alt="">
+  <span class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); showNext()">&#10095;</span>
 </div>
 
 <script>
-function openLightbox(src, alt){
-  const lb = document.getElementById('lightbox');
+const galleryImages = [
+  { src: 'images/sewing/pinkset_evak.png', alt: 'Pink sewn set' },
+  { src: 'images/sewing/purpleset_evak.png', alt: 'Purple sewn set' },
+  { src: 'images/sewing/reddress_evak.png', alt: 'Red dress' },
+  { src: 'images/sewing/checkerset_evak.png', alt: 'Checker print set' },
+  { src: 'images/sewing/blueset_evak.png', alt: 'Blue jumpsuit' },
+  { src: 'images/sewing/blackdress_evak.png', alt: 'Black mesh dress' },
+  { src: 'images/sewing/dotdress_evak.png', alt: 'Dot print dress' },
+  { src: 'images/sewing/blacktop_evak.png', alt: 'Black mesh top' },
+  { src: 'images/sewing/brownset_evak.png', alt: 'Brown knit set' }
+];
+let currentIndex = 0;
+
+function showImage(index){
+  currentIndex = (index + galleryImages.length) % galleryImages.length;
+  const item = galleryImages[currentIndex];
   const img = document.getElementById('lightbox-img');
-  img.src = src;
-  img.alt = alt;
-  lb.classList.add('open');
+  img.src = item.src;
+  img.alt = item.alt;
+}
+function openLightbox(index){
+  showImage(index);
+  document.getElementById('lightbox').classList.add('open');
 }
 function closeLightbox(){
   document.getElementById('lightbox').classList.remove('open');
 }
+function showNext(){ showImage(currentIndex + 1); }
+function showPrev(){ showImage(currentIndex - 1); }
+
+document.getElementById('lightbox').addEventListener('click', closeLightbox);
 document.addEventListener('keydown', function(e){
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
   if(e.key === 'Escape') closeLightbox();
+  if(e.key === 'ArrowRight') showNext();
+  if(e.key === 'ArrowLeft') showPrev();
 });
 </script>
 

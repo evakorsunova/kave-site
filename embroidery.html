@@ -32,61 +32,89 @@
 <section class="gallery-section">
   <div class="wrap">
     <div class="gallery">
-      <figure onclick="openLightbox('images/embroidery/apple.png','Apple embroidery')">
+      <figure onclick="openLightbox(0)">
         <img src="images/embroidery/apple.png" alt="Apple embroidery">
       </figure>
-      <figure onclick="openLightbox('images/embroidery/dragon.png','Dragon embroidery')">
+      <figure onclick="openLightbox(1)">
         <img src="images/embroidery/dragon.png" alt="Dragon embroidery">
       </figure>
-      <figure onclick="openLightbox('images/embroidery/glasses.png','Glasses embroidery')">
+      <figure onclick="openLightbox(2)">
         <img src="images/embroidery/glasses.png" alt="Glasses embroidery">
       </figure>
-      <figure onclick="openLightbox('images/embroidery/hedgehog.png','Hedgehog embroidery')">
+      <figure onclick="openLightbox(3)">
         <img src="images/embroidery/hedgehog.png" alt="Hedgehog embroidery">
       </figure>
-      <figure onclick="openLightbox('images/embroidery/maneskin.png','Maneskin embroidery')">
+      <figure onclick="openLightbox(4)">
         <img src="images/embroidery/maneskin.png" alt="Maneskin embroidery">
       </figure>
-      <figure onclick="openLightbox('images/embroidery/patrick.png','Patrick embroidery')">
+      <figure onclick="openLightbox(5)">
         <img src="images/embroidery/patrick.png" alt="Patrick embroidery">
       </figure>
-      <figure onclick="openLightbox('images/embroidery/rose.png','Rose embroidery')">
+      <figure onclick="openLightbox(6)">
         <img src="images/embroidery/rose.png" alt="Rose embroidery">
       </figure>
-      <figure onclick="openLightbox('images/embroidery/skull.png','Skull embroidery')">
+      <figure onclick="openLightbox(7)">
         <img src="images/embroidery/skull.png" alt="Skull embroidery">
       </figure>
-      <figure onclick="openLightbox('images/embroidery/sponge.png','SpongeBob embroidery')">
+      <figure onclick="openLightbox(8)">
         <img src="images/embroidery/sponge.png" alt="SpongeBob embroidery">
       </figure>
-      <figure onclick="openLightbox('images/embroidery/spongelady.png','SpongeBob SquarePants embroidery')">
+      <figure onclick="openLightbox(9)">
         <img src="images/embroidery/spongelady.png" alt="SpongeBob SquarePants embroidery">
       </figure>
-      <figure onclick="openLightbox('images/embroidery/trulivuli.png','Mama embroidery')">
+      <figure onclick="openLightbox(10)">
         <img src="images/embroidery/trulivuli.png" alt="Mama embroidery">
       </figure>
     </div>
   </div>
 </section>
 
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<div class="lightbox" id="lightbox">
   <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <span class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); showPrev()">&#10094;</span>
   <img id="lightbox-img" src="" alt="">
+  <span class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); showNext()">&#10095;</span>
 </div>
 
 <script>
-function openLightbox(src, alt){
-  const lb = document.getElementById('lightbox');
+const galleryImages = [
+  { src: 'images/embroidery/apple.png', alt: 'Apple embroidery' },
+  { src: 'images/embroidery/dragon.png', alt: 'Dragon embroidery' },
+  { src: 'images/embroidery/glasses.png', alt: 'Glasses embroidery' },
+  { src: 'images/embroidery/hedgehog.png', alt: 'Hedgehog embroidery' },
+  { src: 'images/embroidery/maneskin.png', alt: 'Maneskin embroidery' },
+  { src: 'images/embroidery/patrick.png', alt: 'Patrick embroidery' },
+  { src: 'images/embroidery/rose.png', alt: 'Rose embroidery' },
+  { src: 'images/embroidery/skull.png', alt: 'Skull embroidery' },
+  { src: 'images/embroidery/sponge.png', alt: 'SpongeBob embroidery' },
+  { src: 'images/embroidery/spongelady.png', alt: 'SpongeBob SquarePants embroidery' },
+  { src: 'images/embroidery/trulivuli.png', alt: 'Mama embroidery' }
+];
+let currentIndex = 0;
+
+function showImage(index){
+  currentIndex = (index + galleryImages.length) % galleryImages.length;
+  const item = galleryImages[currentIndex];
   const img = document.getElementById('lightbox-img');
-  img.src = src;
-  img.alt = alt;
-  lb.classList.add('open');
+  img.src = item.src;
+  img.alt = item.alt;
+}
+function openLightbox(index){
+  showImage(index);
+  document.getElementById('lightbox').classList.add('open');
 }
 function closeLightbox(){
   document.getElementById('lightbox').classList.remove('open');
 }
+function showNext(){ showImage(currentIndex + 1); }
+function showPrev(){ showImage(currentIndex - 1); }
+
+document.getElementById('lightbox').addEventListener('click', closeLightbox);
 document.addEventListener('keydown', function(e){
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
   if(e.key === 'Escape') closeLightbox();
+  if(e.key === 'ArrowRight') showNext();
+  if(e.key === 'ArrowLeft') showPrev();
 });
 </script>
 

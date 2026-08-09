@@ -33,6 +33,7 @@
       </clipPath>
     </defs>
     <image href="images/main/background2.png" width="1440" height="300" preserveAspectRatio="xMidYMid slice" clip-path="url(#waveClip)"></image>
+    <path d="M1440,210 C940,430 620,-80 0,50" style="fill:none" stroke="var(--violet)" stroke-width="3" stroke-dasharray="14 10"></path>
   </svg>
 </section>
 
@@ -56,11 +57,33 @@
 
 <section class="hero">
   <div class="wrap">
-    <h1>I'm <span class="signature">Eva</span>!</h1>
-    <p>Ever since I was a child, I've been drawn to every way I could express myself — watercolor, pencil, gouache — before finding my way to graphic design, sewing, knitting, and embroidery.</p>
-    <p>Hopefully my creative journey inspires you to continue — or start — your own.</p>
+    <div class="hero-flip" id="heroFlip" tabindex="0" role="button" aria-pressed="false" aria-label="About Eva, click to flip">
+      <div class="hero-flip-inner">
+        <div class="hero-flip-front">
+          <img src="images/main/mynameis.svg" alt="Hi, I'm Eva!">
+        </div>
+        <div class="hero-flip-back">
+          <img src="images/main/aboutme.svg" alt="Eva about">
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+const heroFlip = document.getElementById('heroFlip');
+function toggleFlip(){
+  const flipped = heroFlip.classList.toggle('flipped');
+  heroFlip.setAttribute('aria-pressed', flipped);
+}
+heroFlip.addEventListener('click', toggleFlip);
+heroFlip.addEventListener('keydown', function(e){
+  if(e.key === 'Enter' || e.key === ' '){
+    e.preventDefault();
+    toggleFlip();
+  }
+});
+</script>
 
 <section class="categories">
   <div class="wrap">
@@ -98,16 +121,13 @@
 <section class="wave-divider">
   <svg viewBox="0 0 1440 300" preserveAspectRatio="none" class="wave-svg">
     <defs>
-      <clipPath id="waveClip">
-        <path d="M1440,80 C1080,200 360,120 0,240 L0,300 L1440,300 Z"></path>
+      <clipPath id="waveClip2">
+        <path d="M1440,180 C960,371 480,-10 0,150 L0,300 L1440,300 Z"></path>
       </clipPath>
     </defs>
-    <image href="images/main/background2.png" width="1440" height="300" preserveAspectRatio="xMidYMid slice" clip-path="url(#waveClip)"></image>
+    <image href="images/main/background2.png" width="1440" height="300" preserveAspectRatio="xMidYMid slice" clip-path="url(#waveClip2)"></image>
+    <path d="M1440,170 C960,361 480,-20 0,140" style="fill:none" stroke="var(--violet)" stroke-width="3" stroke-dasharray="14 10"></path>
   </svg>
-</section>
-
-<section class="quote-banner">
-  <blockquote>"The meaning of life is your work. The material the earth offers you, and what you make of it."</blockquote>
 </section>
 
 <section class="contact">

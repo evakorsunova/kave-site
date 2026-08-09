@@ -29,77 +29,174 @@
     <h1 class="block-heading">Posters</h1>
   </div>
 </section>
-<section class="gallery-section">
+
+<nav class="subnav">
+  <a href="#posters">Posters</a>
+  <a href="#book-covers">Book Cover Design</a>
+</nav>
+
+<section class="gallery-section" id="posters">
   <div class="wrap">
     <div class="gallery">
-      <figure onclick="openLightbox('images/graphic/othello_evak.jpg','Othello poster')">
+      <figure onclick="openLightbox(0)">
         <img src="images/graphic/othello_evak.jpg" alt="Othello poster">
       </figure>
-      <figure onclick="openLightbox('images/graphic/animalfarm_evak.png','Animal Farm poster')">
+      <figure onclick="openLightbox(1)">
         <img src="images/graphic/animalfarm_evak.png" alt="Animal Farm poster">
       </figure>
-      <figure onclick="openLightbox('images/graphic/tothelighthouse_evak.jpg','To The Lighthouse poster')">
+      <figure onclick="openLightbox(2)">
         <img src="images/graphic/tothelighthouse_evak.jpg" alt="To The Lighthouse poster">
       </figure>
-      <figure onclick="openLightbox('images/graphic/eruditt101.png','Erudite Games first poster')">
+      <figure onclick="openLightbox(3)">
         <img src="images/graphic/eruditt101.png" alt="Erudite Games first poster">
       </figure>
-      <figure onclick="openLightbox('images/graphic/basketball_evak.png','Basketball poster')">
+      <figure onclick="openLightbox(4)">
         <img src="images/graphic/basketball_evak.png" alt="Basketball poster">
       </figure>
-      <figure onclick="openLightbox('images/graphic/alchemistfinal_evak.png','The Alchemist poster')">
+      <figure onclick="openLightbox(5)">
         <img src="images/graphic/alchemistfinal_evak.png" alt="The Alchemist poster">
       </figure>
-      <figure onclick="openLightbox('images/graphic/bell_jar_evak.png','The Bell Jar poster')">
+      <figure onclick="openLightbox(6)">
         <img src="images/graphic/bell_jar_evak.png" alt="The Bell Jar poster">
       </figure>
-      <figure onclick="openLightbox('images/graphic/apelsin_evak.jpg','Orange trimming poster')">
+      <figure onclick="openLightbox(7)">
         <img src="images/graphic/apelsin_evak.jpg" alt="Orange trimming poster">
       </figure>
-      <figure onclick="openLightbox('images/graphic/thegreatgatsby_evak.png','The Great Gatsby poster')">
+      <figure onclick="openLightbox(8)">
         <img src="images/graphic/thegreatgatsby_evak.png" alt="The Great Gatsby poster">
       </figure>
-      <figure onclick="openLightbox('images/graphic/eruditu_dec_evak.png','Erudite Games second poster')">
+      <figure onclick="openLightbox(9)">
         <img src="images/graphic/eruditu_dec_evak.png" alt="Erudite Games second poster">
       </figure>
-      <figure onclick="openLightbox('images/graphic/doriangray_evak.png','Dorian Gray poster')">
+      <figure onclick="openLightbox(10)">
         <img src="images/graphic/doriangray_evak.png" alt="Dorian Gray poster">
       </figure>
-      <figure onclick="openLightbox('images/graphic/metamorphosis.jpg','Metamorphosis poster')">
+      <figure onclick="openLightbox(11)">
         <img src="images/graphic/metamorphosis.jpg" alt="Metamorphosis poster">
       </figure>
-      <figure onclick="openLightbox('images/graphic/valleyofthedolls_evak.jpeg','Valley of the Dolls poster')">
+      <figure onclick="openLightbox(12)">
         <img src="images/graphic/valleyofthedolls_evak.jpeg" alt="Valley of the Dolls poster">
       </figure>
-      <figure onclick="openLightbox('images/graphic/restandrelaxation_evak.jpeg','Rest and Relaxation poster')">
+      <figure onclick="openLightbox(13)">
         <img src="images/graphic/restandrelaxation_evak.jpeg" alt="Rest and Relaxation poster">
       </figure>
-      <figure onclick="openLightbox('images/graphic/christmas_book.png','Christmas book club poster')">
+      <figure onclick="openLightbox(14)">
         <img src="images/graphic/christmas_book.png" alt="Christmas book club poster">
       </figure>
     </div>
   </div>
 </section>
 
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<div class="lightbox" id="lightbox">
   <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <span class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); showPrev()">&#10094;</span>
   <img id="lightbox-img" src="" alt="">
+  <span class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); showNext()">&#10095;</span>
 </div>
 
 <script>
-function openLightbox(src, alt){
-  const lb = document.getElementById('lightbox');
+const galleryImages = [
+  { src: 'images/graphic/othello_evak.jpg', alt: 'Othello poster' },
+  { src: 'images/graphic/animalfarm_evak.png', alt: 'Animal Farm poster' },
+  { src: 'images/graphic/tothelighthouse_evak.jpg', alt: 'To The Lighthouse poster' },
+  { src: 'images/graphic/eruditt101.png', alt: 'Erudite Games first poster' },
+  { src: 'images/graphic/basketball_evak.png', alt: 'Basketball poster' },
+  { src: 'images/graphic/alchemistfinal_evak.png', alt: 'The Alchemist poster' },
+  { src: 'images/graphic/bell_jar_evak.png', alt: 'The Bell Jar poster' },
+  { src: 'images/graphic/apelsin_evak.jpg', alt: 'Orange trimming poster' },
+  { src: 'images/graphic/thegreatgatsby_evak.png', alt: 'The Great Gatsby poster' },
+  { src: 'images/graphic/eruditu_dec_evak.png', alt: 'Erudite Games second poster' },
+  { src: 'images/graphic/doriangray_evak.png', alt: 'Dorian Gray poster' },
+  { src: 'images/graphic/metamorphosis.jpg', alt: 'Metamorphosis poster' },
+  { src: 'images/graphic/valleyofthedolls_evak.jpeg', alt: 'Valley of the Dolls poster' },
+  { src: 'images/graphic/restandrelaxation_evak.jpeg', alt: 'Rest and Relaxation poster' },
+  { src: 'images/graphic/christmas_book.png', alt: 'Christmas book club poster' }
+];
+let currentIndex = 0;
+
+function showImage(index){
+  currentIndex = (index + galleryImages.length) % galleryImages.length;
+  const item = galleryImages[currentIndex];
   const img = document.getElementById('lightbox-img');
-  img.src = src;
-  img.alt = alt;
-  lb.classList.add('open');
+  img.src = item.src;
+  img.alt = item.alt;
+}
+function openLightbox(index){
+  showImage(index);
+  document.getElementById('lightbox').classList.add('open');
 }
 function closeLightbox(){
   document.getElementById('lightbox').classList.remove('open');
 }
+function showNext(){ showImage(currentIndex + 1); }
+function showPrev(){ showImage(currentIndex - 1); }
+
+document.getElementById('lightbox').addEventListener('click', closeLightbox);
 document.addEventListener('keydown', function(e){
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
   if(e.key === 'Escape') closeLightbox();
+  if(e.key === 'ArrowRight') showNext();
+  if(e.key === 'ArrowLeft') showPrev();
 });
+</script>
+
+<section class="book-carousel" id="book-covers">
+  <div class="wrap">
+    <h2 class="block-heading">Book Cover Design</h2>
+    <div class="book-carousel-main">
+      <span class="book-carousel-nav book-carousel-prev" onclick="bookPrev()">&#10094;</span>
+      <img id="book-carousel-img" src="images/books/othello_book.png" alt="Othello book cover">
+      <span class="book-carousel-nav book-carousel-next" onclick="bookNext()">&#10095;</span>
+    </div>
+    <div class="book-carousel-thumbs" id="book-carousel-thumbs"></div>
+  </div>
+</section>
+
+<script>
+const bookCovers = [
+  { src: 'images/books/othello_book.png', alt: 'Othello book cover' },
+  { src: 'images/books/room_of_ones_own.png', alt: 'A Room of One\'s Own book cover' },
+  { src: 'images/books/scarlet_letter.png', alt: 'The Scarlet Letter book cover' },
+  { src: 'images/books/variable_cloud.png', alt: 'Variable Cloud book cover' },
+  { src: 'images/books/yearofmagicalthinking.png', alt: 'The Year of Magical Thinking book cover' }
+];
+let bookIndex = 0;
+let bookTimer = null;
+
+const bookImg = document.getElementById('book-carousel-img');
+const bookThumbsWrap = document.getElementById('book-carousel-thumbs');
+
+bookCovers.forEach((cover, i) => {
+  const thumb = document.createElement('img');
+  thumb.src = cover.src;
+  thumb.alt = cover.alt;
+  thumb.className = 'book-carousel-thumb' + (i === 0 ? ' active' : '');
+  thumb.onclick = () => bookGoTo(i, true);
+  bookThumbsWrap.appendChild(thumb);
+});
+
+function bookGoTo(index, manual){
+  bookIndex = (index + bookCovers.length) % bookCovers.length;
+  const cover = bookCovers[bookIndex];
+  bookImg.style.opacity = 0;
+  setTimeout(() => {
+    bookImg.src = cover.src;
+    bookImg.alt = cover.alt;
+    bookImg.style.opacity = 1;
+  }, 150);
+  [...bookThumbsWrap.children].forEach((t, i) => {
+    t.classList.toggle('active', i === bookIndex);
+  });
+  if(manual) restartBookTimer();
+}
+function bookNext(){ bookGoTo(bookIndex + 1, true); }
+function bookPrev(){ bookGoTo(bookIndex - 1, true); }
+
+function restartBookTimer(){
+  clearInterval(bookTimer);
+  bookTimer = setInterval(() => bookGoTo(bookIndex + 1, false), 5000);
+}
+restartBookTimer();
 </script>
 
 <footer>
