@@ -11,7 +11,7 @@
 
 <header>
   <div class="wrap">
-    <a class="brand" href="index.html"><img src="images/kave_logo_vectorized.svg" alt="KAVE"></a>
+    <a class="brand" href="index.html"><img src="images/main/kave_logo_vectorized.svg" alt="KAVE"></a>
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -24,31 +24,83 @@
     </nav>
   </div>
 </header>
-
 <section class="page-header">
   <div class="wrap">
-    <h1>Graphic Design</h1>
+    <h1 class="block-heading">Posters</h1>
   </div>
 </section>
-
 <section class="gallery-section">
   <div class="wrap">
     <div class="gallery">
-      <figure>
-        <div class="placeholder-img">Photo 1</div>
-        <figcaption>Replace with a photo of your work — swap the &lt;div class="placeholder-img"&gt; for an &lt;img src="..."&gt;.</figcaption>
+      <figure onclick="openLightbox('images/graphic/othello_evak.jpg','Othello poster')">
+        <img src="images/graphic/othello_evak.jpg" alt="Othello poster">
       </figure>
-      <figure>
-        <div class="placeholder-img">Photo 2</div>
-        <figcaption>Add a short caption describing the piece, materials, or process.</figcaption>
+      <figure onclick="openLightbox('images/graphic/animalfarm_evak.png','Animal Farm poster')">
+        <img src="images/graphic/animalfarm_evak.png" alt="Animal Farm poster">
       </figure>
-      <figure>
-        <div class="placeholder-img">Photo 3</div>
-        <figcaption>Duplicate this &lt;figure&gt; block to add more pieces.</figcaption>
+      <figure onclick="openLightbox('images/graphic/tothelighthouse_evak.jpg','To The Lighthouse poster')">
+        <img src="images/graphic/tothelighthouse_evak.jpg" alt="To The Lighthouse poster">
+      </figure>
+      <figure onclick="openLightbox('images/graphic/eruditt101.png','Erudite Games first poster')">
+        <img src="images/graphic/eruditt101.png" alt="Erudite Games first poster">
+      </figure>
+      <figure onclick="openLightbox('images/graphic/basketball_evak.png','Basketball poster')">
+        <img src="images/graphic/basketball_evak.png" alt="Basketball poster">
+      </figure>
+      <figure onclick="openLightbox('images/graphic/alchemistfinal_evak.png','The Alchemist poster')">
+        <img src="images/graphic/alchemistfinal_evak.png" alt="The Alchemist poster">
+      </figure>
+      <figure onclick="openLightbox('images/graphic/bell_jar_evak.png','The Bell Jar poster')">
+        <img src="images/graphic/bell_jar_evak.png" alt="The Bell Jar poster">
+      </figure>
+      <figure onclick="openLightbox('images/graphic/apelsin_evak.jpg','Orange trimming poster')">
+        <img src="images/graphic/apelsin_evak.jpg" alt="Orange trimming poster">
+      </figure>
+      <figure onclick="openLightbox('images/graphic/thegreatgatsby_evak.png','The Great Gatsby poster')">
+        <img src="images/graphic/thegreatgatsby_evak.png" alt="The Great Gatsby poster">
+      </figure>
+      <figure onclick="openLightbox('images/graphic/eruditu_dec_evak.png','Erudite Games second poster')">
+        <img src="images/graphic/eruditu_dec_evak.png" alt="Erudite Games second poster">
+      </figure>
+      <figure onclick="openLightbox('images/graphic/doriangray_evak.png','Dorian Gray poster')">
+        <img src="images/graphic/doriangray_evak.png" alt="Dorian Gray poster">
+      </figure>
+      <figure onclick="openLightbox('images/graphic/metamorphosis.jpg','Metamorphosis poster')">
+        <img src="images/graphic/metamorphosis.jpg" alt="Metamorphosis poster">
+      </figure>
+      <figure onclick="openLightbox('images/graphic/valleyofthedolls_evak.jpeg','Valley of the Dolls poster')">
+        <img src="images/graphic/valleyofthedolls_evak.jpeg" alt="Valley of the Dolls poster">
+      </figure>
+      <figure onclick="openLightbox('images/graphic/restandrelaxation_evak.jpeg','Rest and Relaxation poster')">
+        <img src="images/graphic/restandrelaxation_evak.jpeg" alt="Rest and Relaxation poster">
+      </figure>
+      <figure onclick="openLightbox('images/graphic/christmas_book.png','Christmas book club poster')">
+        <img src="images/graphic/christmas_book.png" alt="Christmas book club poster">
       </figure>
     </div>
   </div>
 </section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src, alt){
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src;
+  img.alt = alt;
+  lb.classList.add('open');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeLightbox();
+});
+</script>
 
 <footer>
   <div class="wrap">

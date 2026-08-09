@@ -11,7 +11,7 @@
 
 <header>
   <div class="wrap">
-    <a class="brand" href="index.html"><img src="images/kave_logo_vectorized.svg" alt="KAVE"></a>
+    <a class="brand" href="index.html"><img src="images/main/kave_logo_vectorized.svg" alt="KAVE"></a>
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -32,36 +32,57 @@
 <section class="gallery-section">
   <div class="wrap">
     <div class="gallery">
-      <figure>
-        <img src="images/pinkset_evak.png" alt="Pink sewn set">
+      <figure onclick="openLightbox('images/sewing/pinkset_evak.png','Pink sewn set')">
+        <img src="images/sewing/pinkset_evak.png" alt="Pink sewn set">
       </figure>
-      <figure>
-        <img src="images/purpleset_evak.png" alt="Purple sewn set">
+      <figure onclick="openLightbox('images/sewing/purpleset_evak.png','Purple sewn set')">
+        <img src="images/sewing/purpleset_evak.png" alt="Purple sewn set">
       </figure>
-      <figure>
-        <img src="images/reddress_evak.png" alt="Red dress">
+      <figure onclick="openLightbox('images/sewing/reddress_evak.png','Red dress')">
+        <img src="images/sewing/reddress_evak.png" alt="Red dress">
       </figure>
-      <figure>
-        <img src="images/checkerset_evak.png" alt="Checker print set">
+      <figure onclick="openLightbox('images/sewing/checkerset_evak.png','Checker print set')">
+        <img src="images/sewing/checkerset_evak.png" alt="Checker print set">
       </figure>
-      <figure>
-        <img src="images/blueset_evak.png" alt="Blue jumpsuit">
+      <figure onclick="openLightbox('images/sewing/blueset_evak.png','Blue jumpsuit')">
+        <img src="images/sewing/blueset_evak.png" alt="Blue jumpsuit">
       </figure>
-      <figure>
-        <img src="images/blackdress_evak.png" alt="Black mesh dress">
+      <figure onclick="openLightbox('images/sewing/blackdress_evak.png','Black mesh dress')">
+        <img src="images/sewing/blackdress_evak.png" alt="Black mesh dress">
       </figure>
-      <figure>
-        <img src="images/dotdress_evak.png" alt="Dot print dress">
+      <figure onclick="openLightbox('images/sewing/dotdress_evak.png','Dot print dress')">
+        <img src="images/sewing/dotdress_evak.png" alt="Dot print dress">
       </figure>
-      <figure>
-        <img src="images/blacktop_evak.png" alt="Black mesh top">
+      <figure onclick="openLightbox('images/sewing/blacktop_evak.png','Black mesh top')">
+        <img src="images/sewing/blacktop_evak.png" alt="Black mesh top">
       </figure>
-      <figure>
-        <img src="images/brownset_evak.png" alt="Brown knit set">
+      <figure onclick="openLightbox('images/sewing/brownset_evak.png','Brown knit set')">
+        <img src="images/sewing/brownset_evak.png" alt="Brown knit set">
       </figure>
     </div>
   </div>
 </section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src, alt){
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src;
+  img.alt = alt;
+  lb.classList.add('open');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeLightbox();
+});
+</script>
 
 <footer>
   <div class="wrap">
