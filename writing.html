@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Writing — KAVE</title>
-<meta name="description" content="Notes, reflections, and stories from along the way.">
+<meta name="description" content="Notes, reflections, and stories from the creative process.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="subpage">
@@ -27,31 +27,85 @@
 
 <section class="page-header">
   <div class="wrap">
-    <h1>Writing</h1>
-    <p>Notes, reflections, and stories from along the way.</p>
+    <h1 class="block-heading">Writing</h1>
   </div>
 </section>
 
-<hr class="stitch">
+<section>
+  <div class="wrap blog-layout">
+    <div class="blog-posts" id="blogPosts">
 
-<section class="gallery-section">
-  <div class="wrap">
-    <div class="gallery">
-      <figure>
-        <div class="placeholder-img">Photo 1</div>
-        <figcaption>Replace with a photo of your work — swap the &lt;div class="placeholder-img"&gt; for an &lt;img src="..."&gt;.</figcaption>
-      </figure>
-      <figure>
-        <div class="placeholder-img">Photo 2</div>
-        <figcaption>Add a short caption describing the piece, materials, or process.</figcaption>
-      </figure>
-      <figure>
-        <div class="placeholder-img">Photo 3</div>
-        <figcaption>Duplicate this &lt;figure&gt; block to add more pieces.</figcaption>
-      </figure>
+      <article class="blog-post" data-category="Opinion on society">
+        <img class="blog-post-thumb" src="images/writing/dodgeball.jpg" alt="Dodgeball">
+        <div>
+          <div class="blog-post-date">5 April 2024</div>
+          <h3>Dodgeball</h3>
+          <p>The bell rang and just as people were starting to rush out of their classrooms I moved closer to the timber double doors that lead to the school gym. The woodwork of the left door caught my eye. It looked a tad bit crook&hellip;</p>
+          <a class="blog-post-more" href="blogs/writing-dodgeball.html">Continue Reading →</a>
+        </div>
+      </article>
+
+      <article class="blog-post" data-category="Opinion on society">
+        <img class="blog-post-thumb" src="images/writing/wonder.jpg" alt="Post thumbnail">
+        <div>
+          <div class="blog-post-date">16 November 2023</div>
+          <h3>Feel Wonder While You Wander</h3>
+          <p>Mother Nature is begging her rebellious children to behave.&hellip;</p>
+          <a class="blog-post-more" href="blogs/writing-wonder.html">Continue Reading →</a>
+        </div>
+      </article>
+
+      <article class="blog-post" data-category="Opinion on love">
+        <img class="blog-post-thumb" src="images/writing/lifepath.jpg" alt="Post thumbnail">
+        <div>
+          <div class="blog-post-date">22 July 2023</div>
+          <h3>A Life Path Is A Maze</h3>
+          <p>The present times have opened a door to thousands of new possibilities. The days of inheriting your family's profession are long behind us. You can become a preacher even if your dad owned a brothel, you just have to pay&hellip;</p>
+          <a class="blog-post-more" href="blogs/writing-lifepath.html">Continue Reading →</a>
+        </div>
+      </article>
+
+      <article class="blog-post" data-category="Opinion on life">
+        <img class="blog-post-thumb" src="images/writing/pixie.jpg" alt="Post thumbnail">
+        <div>
+          <div class="blog-post-date">18 July 2023</div>
+          <h3>In Defense Of: The Manic Pixie Dream Girl</h3>
+          <p>I have not lived long, but I have lived long enough to love and to hate. And this is most prominent in my love-hate relationship with the concept of a manic pixie dream girl&hellip;</p>
+          <a class="blog-post-more" href="blogs/writing-pixie.html">Continue Reading →</a>
+        </div>
+      </article>
+
     </div>
+
+    <aside class="blog-categories">
+      <h4>Categories</h4>
+      <ul id="categoryList">
+        <li><a href="#" class="active" data-category="All Posts">All Posts</a></li>
+        <li><a href="#" data-category="Opinion on life">Opinion on life</a></li>
+        <li><a href="#" data-category="Opinion on love">Opinion on love</a></li>
+        <li><a href="#" data-category="Opinion on society">Opinion on society</a></li>
+      </ul>
+    </aside>
   </div>
 </section>
+
+<script>
+const categoryLinks = document.querySelectorAll('#categoryList a');
+const posts = document.querySelectorAll('.blog-post');
+
+categoryLinks.forEach(link => {
+  link.addEventListener('click', function(e){
+    e.preventDefault();
+    categoryLinks.forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+    const selected = this.dataset.category;
+    posts.forEach(post => {
+      const show = selected === 'All Posts' || post.dataset.category === selected;
+      post.style.display = show ? 'grid' : 'none';
+    });
+  });
+});
+</script>
 
 <footer>
   <div class="wrap">
