@@ -24,34 +24,151 @@
     </nav>
   </div>
 </header>
-
 <section class="page-header">
   <div class="wrap">
-    <h1>Other</h1>
-    <p>Watercolor, knitting, and whatever else doesn't fit neatly into a category.</p>
+    <h1 class="block-heading">Knitting & Crochet</h1>
   </div>
 </section>
 
-<hr class="stitch">
+<nav class="subnav">
+  <a href="#knit">Knitting & Crochet</a>
+  <a href="#drawing">Drawing</a>
+  <a href="#costume">Costume Design</a>
+</nav>
 
-<section class="gallery-section">
+<section class="gallery-section" id="knit">
   <div class="wrap">
-    <div class="gallery">
-      <figure>
-        <div class="placeholder-img">Photo 1</div>
-        <figcaption>Replace with a photo of your work — swap the &lt;div class="placeholder-img"&gt; for an &lt;img src="..."&gt;.</figcaption>
+    <div class="gallery gallery-center">
+      <figure onclick="openLightbox(0)">
+        <img src="images/knitting/knitting_vest.png" alt="Knitting vest">
       </figure>
-      <figure>
-        <div class="placeholder-img">Photo 2</div>
-        <figcaption>Add a short caption describing the piece, materials, or process.</figcaption>
-      </figure>
-      <figure>
-        <div class="placeholder-img">Photo 3</div>
-        <figcaption>Duplicate this &lt;figure&gt; block to add more pieces.</figcaption>
+      <figure onclick="openLightbox(1)">
+        <img src="images/knitting/lavender.png" alt="Lavender knitting">
       </figure>
     </div>
   </div>
 </section>
+
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <span class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); showPrev()">&#10094;</span>
+  <img id="lightbox-img" src="" alt="">
+  <span class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); showNext()">&#10095;</span>
+</div>
+
+<script>
+const galleryImages = [
+  { src: 'images/knitting/knitting_vest.png', alt: 'Knitting vest' },
+  { src: 'images/knitting/lavender.png', alt: 'Lavender knitting' }
+];
+let currentIndex = 0;
+
+function showImage(index){
+  currentIndex = (index + galleryImages.length) % galleryImages.length;
+  const item = galleryImages[currentIndex];
+  const img = document.getElementById('lightbox-img');
+  img.src = item.src;
+  img.alt = item.alt;
+}
+function openLightbox(index){
+  showImage(index);
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+}
+function showNext(){ showImage(currentIndex + 1); }
+function showPrev(){ showImage(currentIndex - 1); }
+
+document.getElementById('lightbox').addEventListener('click', closeLightbox);
+document.addEventListener('keydown', function(e){
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
+  if(e.key === 'Escape') closeLightbox();
+  if(e.key === 'ArrowRight') showNext();
+  if(e.key === 'ArrowLeft') showPrev();
+});
+</script>
+
+<section class="book-carousel" id="drawing">
+  <div class="wrap">
+    <h2 class="block-heading">Drawing</h2>
+    <div class="book-carousel-main">
+      <span class="book-carousel-nav book-carousel-prev" onclick="drawingCarousel.prev()">&#10094;</span>
+      <img id="drawing-carousel-img" src="images/drawing/woman_evak.png" alt="Woman drawing">
+      <span class="book-carousel-nav book-carousel-next" onclick="drawingCarousel.next()">&#10095;</span>
+    </div>
+    <div class="book-carousel-thumbs" id="drawing-carousel-thumbs"></div>
+  </div>
+</section>
+
+<section class="book-carousel" id="costume">
+  <div class="wrap">
+    <h2 class="block-heading">Costume Design</h2>
+    <div class="book-carousel-main">
+      <span class="book-carousel-nav book-carousel-prev" onclick="costumeCarousel.prev()">&#10094;</span>
+      <img id="costume-carousel-img" src="images/costume/play1.png" alt="Costume design">
+      <span class="book-carousel-nav book-carousel-next" onclick="costumeCarousel.next()">&#10095;</span>
+    </div>
+    <div class="book-carousel-thumbs" id="costume-carousel-thumbs"></div>
+  </div>
+</section>
+
+<script>
+function createCarousel(imgId, thumbsId, images){
+  const imgEl = document.getElementById(imgId);
+  const thumbsWrap = document.getElementById(thumbsId);
+  let index = 0;
+  let timer = null;
+
+  images.forEach((item, i) => {
+    const thumb = document.createElement('img');
+    thumb.src = item.src;
+    thumb.alt = item.alt;
+    thumb.className = 'book-carousel-thumb' + (i === 0 ? ' active' : '');
+    thumb.onclick = () => goTo(i, true);
+    thumbsWrap.appendChild(thumb);
+  });
+
+  function goTo(newIndex, manual){
+    index = (newIndex + images.length) % images.length;
+    const item = images[index];
+    imgEl.style.opacity = 0;
+    setTimeout(() => {
+      imgEl.src = item.src;
+      imgEl.alt = item.alt;
+      imgEl.style.opacity = 1;
+    }, 150);
+    [...thumbsWrap.children].forEach((t, i) => {
+      t.classList.toggle('active', i === index);
+    });
+    if(manual) restartTimer();
+  }
+  function restartTimer(){
+    clearInterval(timer);
+    timer = setInterval(() => goTo(index + 1, false), 5000);
+  }
+  restartTimer();
+
+  return {
+    next: () => goTo(index + 1, true),
+    prev: () => goTo(index - 1, true)
+  };
+}
+
+const drawingCarousel = createCarousel('drawing-carousel-img', 'drawing-carousel-thumbs', [
+  { src: 'images/drawing/woman_evak.png', alt: 'Woman drawing' },
+  { src: 'images/drawing/sitting.png', alt: 'Sitting drawing' },
+  { src: 'images/drawing/naked.png', alt: 'Naked drawing' },
+  { src: 'images/drawing/lily.png', alt: 'Lily drawing' },
+  { src: 'images/drawing/flowers.jpg', alt: 'Flowers drawing' }
+]);
+
+const costumeCarousel = createCarousel('costume-carousel-img', 'costume-carousel-thumbs', [
+  { src: 'images/costume/play1.png', alt: 'Costume design' },
+  { src: 'images/costume/play2.png', alt: 'Character costume' },
+  { src: 'images/costume/play3.png', alt: 'Character costume' }
+]);
+</script>
 
 <footer>
   <div class="wrap">

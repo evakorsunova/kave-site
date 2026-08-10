@@ -344,7 +344,16 @@ body.subpage{ background:var(--grey); }
 @media (max-width:700px){
   .gallery{ columns:2; }
 }
-
+.gallery-center{
+  columns:unset;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:4px;
+}
+.gallery-center figure{
+  width:300px;
+}
 /* ---------- lightbox ---------- */
 .lightbox{
   display:none;
