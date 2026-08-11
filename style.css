@@ -130,7 +130,7 @@ nav a.active{
   width:420px;
   max-width:100%;
   cursor:pointer;
-  margin-left:-30px;
+  margin-left:-10px;
 }
 .hero-flip-inner{
   position:relative;
@@ -453,11 +453,11 @@ body.subpage{ background:var(--grey); }
 
 .about-photo-circle{
   position:relative;
-  width:280px;
-  height:280px;
+  width:250px;
+  height:250px;
   flex-shrink:0;
-  margin-top:-375px;
-  margin-right:-50px;
+  margin-top:-325px;
+  margin-right:0;
 }
 .about-photo-circle img{
   width:100%;
@@ -470,8 +470,8 @@ body.subpage{ background:var(--grey); }
   position:absolute;
   top:-25px;
   left:-25px;
-  width:330px;
-  height:330px;
+  width:300px;
+  height:300px;
   pointer-events:none;
   animation:spin-caption 20s linear infinite;
 }
