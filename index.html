@@ -135,7 +135,10 @@ heroFlip.addEventListener('keydown', function(e){
     <div class="contact-grid">
       <div>
         <h2 class="contact-subhead">Get in touch!</h2>
-        <form>
+        <form action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="38f56095-2f31-41ad-961e-1af0480c2908">
+          <input type="hidden" name="subject" value="New message from KAVE contact form">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
           <div>
             <label for="name">Name *</label>
             <input id="name" name="name" type="text" required>
